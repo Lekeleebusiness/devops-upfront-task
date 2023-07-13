@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: jobleads-service
+spec:
+  selector:
+    app: counterapp
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80

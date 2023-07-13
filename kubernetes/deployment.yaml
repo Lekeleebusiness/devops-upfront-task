@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: python-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: counterapp
+  template:
+    metadata:
+      labels:
+        app: counterapp
+    spec:
+      containers:
+        - name: counter-app
+          image: lekelee/counter-app
+          envFrom:
+            - configMapRef:
+                name: my-configmap
+          resources:
+            requests:
+              cpu: 200m
+              memory: 256Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP

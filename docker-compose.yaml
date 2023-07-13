@@ -1,0 +1,17 @@
+version: '3'
+services:
+  counter-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 80:80
+    depends_on:
+      - redis
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PASSWORD=myredispassword
+
+  redis:
+    image: redis:latest
+    command: redis-server --requirepass myredispassword
